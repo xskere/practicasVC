@@ -6,9 +6,11 @@ Para crear un tablero de ajedrez debemos tener en cuenta las dimensiones del tab
 
 ## TAREA: Crear una imagen estilo Mondrian
 
+Para crear una imagen estilo Mondrian, simplemente se usaron las funciones de cv2 para crear lineas de distinto recorrido, con la intención de crear un patrón no simétrico. Tras eso, usando la función rectangle de cv2 en los recuadros creados por las lineas se dibujaron rectángulos rellenos de distintos colores.
+
 ## TAREA: Modifica de alguna forma los valores de un plano de la imagen
 
-
+En esta tarea se toma el input de la cámara y se invierte el plano azul de la imagen. Esto se hizo tomando el valor actual de dicho plano y restándoselo a 255. De esta forma se ha invertido únicamente el plano azul.
 
 ## TAREA: Pintar círculos en las posiciones del píxel más claro y oscuro de la imagen  ¿Si quisieras hacerlo sobre la zona 8x8 más clara/oscura?
 
@@ -21,4 +23,4 @@ con un temporizador para que no este constantemente calculando y ralentizando el
 
 ## TAREA: Haz tu propuesta pop art
 
-
+En esta tarea se propone un pop art de lentejuelas. Mediante cv2 se dibujan círculos del color del centro del círculo a dibujar, estos círculos se superponen, creando así un efecto de lentejuelas. Una primera iteración de esto fue una simple pixelación de la imagen usando rectángulos. Por curiosidad se cambió a círculos y tomó dicho efecto. La función pixelar sigue en el código, pero comentada.
