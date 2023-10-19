@@ -2,7 +2,11 @@
 
 ## TAREA: Captura una o varias imágenes con monedas no solapadas y algún objeto que no lo sea. Filtra los contornos que no se correpondan con monedas, y muestra el número total de monedas presentes en la imagen. Una alternativa consiste en contar círculos utilizando la Transformada de Hough. La selección de parámetros puede ser "divertida", más [información](https://docs.opencv.org/4.x/da/d53/tutorial_py_houghcircles.html)
 
+Con la técnica de Hough resultó más fácil filtrar las monedas, por tanto se utilizó la función HoughCircles de cv2. Con esto y un filtrado del área del círculo, se puede de forma relativamente clara encontrar fácilmente las monedas.
+
 ## TAREA: Captura una o varias imágenes con monedas no solapadas, y otras con monedas solapadas. Identificada una moneda de un euro en la imagen, por ejemplo con un clic de ratón, calcular la cantidad de dinero presente en la imagen. ¿Qué problemas han observado?
+
+Para el conteo el dinero, se utilizó la función ya determinada anteriormente de Hough. Gracias a que se indica el área del círculo, se puede estimar qué moneda es cuál, teniendo como referencia un euro clickado anteriormente. Hay varios problemas con este método, dependiendo de la perepectiva, alguna monedas puede ser detectada como un círculo de mayor tamaño de lo que realmente es.
 
 ## TAREA: Estas tres imágenes han sido extraidas de las imágenes de mayor tamaño contenidas en la carpeta. Determina patrones geométricos para cada una de las tres clases y evalúa los aciertos y fallos con las imágenes completas la matriz de confusión. Para cada clase, determina el número de muestras que se clasifican correctamente de dicha clase, y el número de muestras que se clasifica incorrectamente por cada una de las otras dos clases.
 
