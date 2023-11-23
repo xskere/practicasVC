@@ -19,41 +19,45 @@ Para entrenar el modelo obtuvimos un dataset en kaggle donde nos proporcionaban 
 
 ### 2.2. Resultados gráficos del entrenamiento
 
+Aquí se encuentran los resultados gráficos del entrenamiento. Como podemos ver, en general son resultados realmente positivos.
 
 <p align="center">
-  <img width="540" height="300" src="runs/detect/train3/results.png">
+  <img src="runs/detect/train3/results.png">
 </p>
 <p align="center">
   Diferentes métricas del entrenamiento
 </p>
-
+<br><br>
+La matriz de confusión nos permite ver que una gran mayoría de las matrículas fueron reconocidas, habiendo varios falsos positivos, y solo 3 falsos negativos.
+<br><br>
 <p align="center">
-  <img width="350" height="250" src="runs/detect/train3/confusion_matrix.png">
+  <img src="runs/detect/train3/confusion_matrix.png">
 </p>
 <p align="center">
   Matriz de confusión
 </p>
-
+<br><br>
 <p align="center">
-  <img width="350" height="250" src="runs/detect/train3/P_curve.png">
+  <img src="runs/detect/train3/P_curve.png">
 </p>
 <p align="center">
   Precision curve
 </p>
-
+<br><br>
 <p align="center">
-  <img width="350" height="250" src="runs/detect/train3/R_curve.png">
+  <img src="runs/detect/train3/R_curve.png">
 </p>
 <p align="center">
   Recall curve
 </p>
-
+<br><br>
 <p align="center">
-  <img width="350" height="250" src="runs/detect/train3/PR_curve.png">
+  <img src="runs/detect/train3/PR_curve.png">
 </p>
 <p align="center">
   Precision-Recall curve
 </p>
+<br><br>
 
 ## 3. Lectura de matrículas
 
