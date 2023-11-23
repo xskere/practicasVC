@@ -13,6 +13,51 @@ En esta parte de la práctica se puede plantear de 2 formas, suponer donde se ub
 
 ### 2.1. Entrenamiento del modelo
 
-Para entrenar el modelo obtuvimos un dataset en kaggle donde nos proporcionaban las imágenes y las etiquetas las cuales tuvimos que cambiar de formato para que se ajustaran al modelo YOLO. Una vez tuvimos las imágenes y las etiquetas preparadas dividimos las imágenes entre las 3 carpetas que se usan durante el entrenamiento, el 70% en la de entrenamiento, el 20% en la de validación y el 10% final en la de test.
+Para entrenar el modelo obtuvimos un dataset en kaggle donde nos proporcionaban las imágenes y las etiquetas las cuales tuvimos que cambiar de formato para que se ajustaran al modelo YOLO. Una vez tuvimos las imágenes y las etiquetas preparadas dividimos las imágenes entre las 3 carpetas que se usan durante el entrenamiento, el 70% en la de entrenamiento, el 20% en la de validación y el 10% final en la de test. Con las imágenes ordenadas, utilizamos el modelo YOLO para entrenar uno nuevo que encuentre nuestras matrículas. Con nuestro modelo terminado, podemos localizar las matrículas en los coches con más facilidad, utilizando ambos modelos YOLO.
 
 ### 2.2. 
+
+
+
+## 3. Lectura de matrículas
+
+Una vez ya detectamos las matrículas, procedemos a usar la imagen de la matrícula para su lectura, para poder detectar mejor las matrículas se ha pasado la imagen a gris, se le ha introducido un filtro gaussiano y se ha umbralizado la imagen. Con esta imagen umbralizada se la pasamos a easyOCR, que en nuestra experiencia es el que mejor funciona en casos donde las imágenes no están tan bien definidas. Finalmente, escribimos el resultado en blanco encima de la imagen.
+
+<p align="center">
+  <img width="300" height="100" src="images/umbralizado.jpg">
+</p>
+<p align="center">
+  Imagen de la matrícula una vez umbralizada.
+</p>
+
+## 4. Resultados
+
+Por último los resultados, en cuanto a detección de vehículos y matrículas, el porcentaje de detección es muy alto, casi siempre encuentra todos los vehículos de la imagen y las matrículas si son visibles de estos coches. En cuanto a la lectura depende de lo bien definida que este la imagen de la matrículas ya que en algunos casos resulta muy dificil de leer o el umbralizado empeora más la imagen ya que no encuentra los contornos adecuados. A continuación algunos resultados.
+
+<p align="center">
+  <img width="300" height="200" src="images/resultado.jpg">
+</p>
+<p align="center">
+  En esta imagen podemos ver que detecta KEG1CA2555 lo que sería casi perfecto menos por un carácter, e easyOCR nos indica que tiene un 29% de posibilidades que el resultado sea correcto.
+</p>
+
+<p align="center">
+  <img width="300" height="200" src="images/resultado1.jpg">
+</p>
+<p align="center">
+  En esta imagen podemos ver que detecta PG MNN112 que es la matrícula perfecta, e easyOCR nos indica que tiene un 11.64% de posibilidades que el resultado sea correcto.
+</p>
+
+<p align="center">
+  <img width="300" height="200" src="images/resultado2.jpg">
+</p>
+<p align="center">
+  En esta imagen podemos ver que detecta todos los coches de la imagen y la única matrícula visible, pero es incapaz de ver el contenido de la matrícula.
+</p>
+
+<p align="center">
+  <img width="300" height="200" src="images/umbralizado1.jpg">
+</p>
+<p align="center">
+  Este es el resultado de la única matrícula detectada de la anterior imagen, como podemos observar al tener pocos píxeles no ha podido determinar correctamente si había carácteres dentro por lo que el resultado es este.
+</p>
