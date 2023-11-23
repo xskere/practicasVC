@@ -28,7 +28,7 @@ Aquí se encuentran los resultados gráficos del entrenamiento. Como podemos ver
   Diferentes métricas del entrenamiento
 </p>
 <br><br>
-La matriz de confusión nos permite ver que una gran mayoría de las matrículas fueron reconocidas, habiendo varios falsos positivos, y solo 3 falsos negativos.
+La matriz de confusión nos permite ver que una gran mayoría de las matrículas fueron reconocidas, habiendo varios falsos positivos, y solo 3 falsos negativos. Dado el gran número de falsos positivos, en la implementación se tomarán medidas, como asegurarse de que la matrícula se encuenre en un coche, para remediarlo.
 <br><br>
 <p align="center">
   <img src="runs/detect/train3/confusion_matrix.png">
