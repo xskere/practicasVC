@@ -13,6 +13,10 @@ En esta parte de la práctica se puede plantear de 2 formas, suponer donde se ub
 
 ### 2.1. Entrenamiento del modelo
 
-Para entrenar el modelo obtuvimos un dataset en kaggle donde nos proporcionaban las imágenes y las etiquetas las cuales tuvimos que cambiar de formato para que se ajustaran al modelo YOLO. Una vez tuvimos las imágenes y las etiquetas preparadas dividimos las imágenes entre las 3 carpetas que se usan durante el entrenamiento, el 70% en la de entrenamiento, el 20% en la de validación y el 10% final en la de test.
+Para entrenar el modelo obtuvimos un dataset en kaggle donde nos proporcionaban 300 imágenes y las etiquetas las cuales tuvimos que cambiar de formato para que se ajustaran al modelo YOLO. Una vez tuvimos las imágenes y las etiquetas preparadas dividimos las imágenes entre las 3 carpetas que se usan durante el entrenamiento, el 70% en la de entrenamiento, el 20% en la de validación y el 10% final en la de test.
+
+![Training](https://github.com/xskere/practicasVC/assets/45332444/4e1ec587-1120-4733-bd9f-6c860a686dc6)
 
 ### 2.2. 
+
+
