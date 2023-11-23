@@ -17,9 +17,43 @@ Para entrenar el modelo obtuvimos un dataset en kaggle donde nos proporcionaban 
 
 ![Training](https://github.com/xskere/practicasVC/assets/45332444/4e1ec587-1120-4733-bd9f-6c860a686dc6)
 
-### 2.2. 
+### 2.2. Resultados gráficos del entrenamiento
 
 
+<p align="center">
+  <img width="540" height="300" src="runs/detect/train3/results.png">
+</p>
+<p align="center">
+  Diferentes métricas del entrenamiento
+</p>
+
+<p align="center">
+  <img width="350" height="250" src="runs/detect/train3/confusion_matrix.png">
+</p>
+<p align="center">
+  Matriz de confusión
+</p>
+
+<p align="center">
+  <img width="350" height="250" src="runs/detect/train3/P_curve.png">
+</p>
+<p align="center">
+  Precision curve
+</p>
+
+<p align="center">
+  <img width="350" height="250" src="runs/detect/train3/R_curve.png">
+</p>
+<p align="center">
+  Recall curve
+</p>
+
+<p align="center">
+  <img width="350" height="250" src="runs/detect/train3/PR_curve.png">
+</p>
+<p align="center">
+  Precision-Recall curve
+</p>
 
 ## 3. Lectura de matrículas
 
