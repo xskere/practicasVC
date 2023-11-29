@@ -59,6 +59,16 @@ La matriz de confusión nos permite ver que una gran mayoría de las matrículas
 </p>
 <br><br>
 
+### 2.3. Detección geométrica
+
+La detección geométrica la hemos empleado a partir de la detección del modelo YOLO de un coche, una vez el coche es detectado suponemos que la matrícula sigue el estándar de tener la matrícula en la parte baja central frontal o trasera del coche. Viendo el ancho de la imagen podemos determinar como podría ser la imagen. 
+
+Si la imagen del coche es diferencialmente más ancha que alta, podemos tener diferentes posibilidades, que la foto esté sacada desde cerca del mismo, por lo que la detección aparecerá más ancha, otra posibilidad sería una foto del coche de lado por lo que sería más ancho y la matrícula se encontraría en uno de los 2 lados si es visible. Entonces en este tipo de casos hemos recortado la imagen del coche un poco por arriba, por los lados muy poco, y un poco por abajo, y finalmente hemos mandado 3 imágenes desde la izquierda, el centro y la derecha del vehículo, y que el modelo de easyOCR determine cual es la imagen que más fidelidad tiene, para mostrarnos cual es la posible ubicación de la matrícula.
+
+Si la detección tiende a ser cuadrada, podemos determinar que es una foto sacada de la parte frontal o trasera del coche bien centrada, por lo que comprobamos que la matrícula está en la parte inferior central de la imagen de detección.
+
+Y como último caso es que la imagen de detección sea diferencialmente más alta que ancha, podemos pensar que se trata de una imagen frontal o trasera de un vehículo de grandes dimensiones, por lo que recortaremos la imagen bastante por arriba, un poco por los lados, y muy poco por abajo.
+
 ## 3. Lectura de matrículas
 
 Una vez ya detectamos las matrículas, procedemos a usar la imagen de la matrícula para su lectura, para poder detectar mejor las matrículas se ha pasado la imagen a gris, se le ha introducido un filtro gaussiano y se ha umbralizado la imagen. Con esta imagen umbralizada se la pasamos a easyOCR, que en nuestra experiencia es el que mejor funciona en casos donde las imágenes no están tan bien definidas. Finalmente, escribimos el resultado en blanco encima de la imagen.
@@ -99,5 +109,12 @@ Por último los resultados, en cuanto a detección de vehículos y matrículas, 
   <img width="300" height="200" src="images/umbralizado1.jpg">
 </p>
 <p align="center">
-  Este es el resultado de la única matrícula detectada de la anterior imagen, como podemos observar al tener pocos píxeles no ha podido determinar correctamente si había carácteres dentro por lo que el resultado es este.
+  Este es el resultado de la única matrícula detectada de la anterior imagen, como podemos observar al tener pocos píxeles y al aplicar el umbralizado no ha podido determinar correctamente si había carácteres dentro por lo que el resultado es este.
+</p>
+
+<p align="center">
+  <img width="600" height="350" src="videos/VC_P5.gif">
+</p>
+<p align="center">
+  Resultados después de procesar <a HREF="https://www.youtube.com/watch?v=Gr0HpDM8Ki8">este vídeo</a> con los 2 modelos de detección.
 </p>
