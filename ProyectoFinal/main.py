@@ -43,14 +43,14 @@ while cap.isOpened():
 
     # Process the frame with Mediapipe hands
     results = hands.process(rgb_frame)
-
+    frameNoMarks = frame.copy()
     # Check if hands are detected
     if results.multi_hand_landmarks:
         for i in range(len(results.multi_hand_landmarks)):
+
             mp.solutions.drawing_utils.draw_landmarks(frame, results.multi_hand_landmarks[i], mp_hands.HAND_CONNECTIONS)
 
             hand_label = "Right" if results.multi_handedness[i].classification[0].label == "Right" else "Left"
-
             cv2.putText(frame, hand_label,
                         (int(results.multi_hand_landmarks[i].landmark[0].x * frame.shape[1]), int(results.multi_hand_landmarks[i].landmark[0].y * frame.shape[0])),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
@@ -61,7 +61,7 @@ while cap.isOpened():
     # Display the frame
     cv2.imshow('Camera with Tracking', frame)
     cv2.imshow('Spray', canvas)
-    frame_with_paint = cv2.add(frame, canvas)
+    frame_with_paint = cv2.add(frameNoMarks, canvas)
     cv2.imshow('Painting in camera', frame_with_paint)
 
 
