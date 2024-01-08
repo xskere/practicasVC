@@ -73,9 +73,14 @@ while cap.isOpened():
 
                 # Example: Check if hand is in a closed fist
                 is_closed_fist = distance_thumb_index < 0.1  # Adjust the threshold as needed
+
                 is_v_sign = is_closed_fist and abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[8].y) > 0.1 and abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[12].y) > 0.1
 
-                if is_v_sign:
+                is_pinch = (abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[8].y) < 0.03 and abs(thumb_tip.x - results.multi_hand_landmarks[i].landmark[8].x) < 0.03) and (abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[12].y) < 0.03 and abs(thumb_tip.x - results.multi_hand_landmarks[i].landmark[12].x) < 0.03) and (abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[16].y) < 0.06 and abs(thumb_tip.x - results.multi_hand_landmarks[i].landmark[16].x) < 0.06) and (abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[20].y) < 0.09 and abs(thumb_tip.x - results.multi_hand_landmarks[i].landmark[20].x) < 0.09)
+
+                if is_pinch:
+                    print("Pinch")
+                elif is_v_sign:
                     print("V sign")
                 elif is_closed_fist:
                     print("Cerrado")
