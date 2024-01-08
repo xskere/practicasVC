@@ -9,13 +9,17 @@ def spray_paint(x, y):
     # Draw spray paint effect
     radius = 15
     thickness = -1  # Fill the circle
-    color = (0, 255, 0)  # Spray paint color
 
     # Generate random points inside the circle to simulate spray
-    for _ in range(20):  # Adjust the number of iterations per tick
+
+    if color == (0,0,0):
+        cv2.circle(canvas, (x, y), 15, (color), thickness)
+    else:
+        for _ in range(20):  # Adjust the number of iterations per tick
          spray_x = x + int(np.random.uniform(-radius, radius))
          spray_y = y + int(np.random.uniform(-radius, radius))
-         cv2.circle(canvas, (spray_x, spray_y), 1, color, thickness)
+         cv2.circle(canvas, (spray_x, spray_y), 1, (color), thickness)
+
 
     return frame
 
@@ -24,6 +28,7 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 
 canvas = None
+color = (0, 255, 0)  # Spray paint color
 
 # Initialize video capture
 cap = cv2.VideoCapture(0)
@@ -52,8 +57,6 @@ while cap.isOpened():
 
             mp.solutions.drawing_utils.draw_landmarks(frame, results.multi_hand_landmarks[i], mp_hands.HAND_CONNECTIONS)
 
-
-
             hand_label = "Right" if results.multi_handedness[i].classification[0].label == "Right" else "Left"
             cv2.putText(frame, hand_label,
                         (int(results.multi_hand_landmarks[i].landmark[0].x * frame.shape[1]), int(results.multi_hand_landmarks[i].landmark[0].y * frame.shape[0])),
@@ -64,28 +67,40 @@ while cap.isOpened():
             else:
 
                 thumb_tip = results.multi_hand_landmarks[i].landmark[4]  # Thumb tip landmark index
-                thumb_up = thumb_tip.y < results.multi_hand_landmarks[i].landmark[3].y and thumb_tip.y < results.multi_hand_landmarks[i].landmark[0].y and thumb_tip.y < results.multi_hand_landmarks[i].landmark[12].y
+
+                distance_thumb_pointer = math.sqrt((thumb_tip.x - results.multi_hand_landmarks[i].landmark[8].x) ** 2 +
+                                                 (thumb_tip.y - results.multi_hand_landmarks[i].landmark[8].y) ** 2 +
+                                                 (thumb_tip.z - results.multi_hand_landmarks[i].landmark[8].z) ** 2)
+
+                is_thumb_up = thumb_tip.y < results.multi_hand_landmarks[i].landmark[3].y and thumb_tip.y < results.multi_hand_landmarks[i].landmark[0].y and thumb_tip.y < results.multi_hand_landmarks[i].landmark[12].y and (distance_thumb_pointer > 0.1)
 
                 small_finger_tip = results.multi_hand_landmarks[i].landmark[20]
                 distance_thumb_index = math.sqrt((thumb_tip.x - small_finger_tip.x) ** 2 +
                                                  (thumb_tip.y - small_finger_tip.y) ** 2 +
                                                  (thumb_tip.z - small_finger_tip.z) ** 2)
 
-                # Example: Check if hand is in a closed fist
-                is_closed_fist = distance_thumb_index < 0.1  # Adjust the threshold as needed
+                is_closed_fist = distance_thumb_index < 0.2
 
                 is_v_sign = is_closed_fist and abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[8].y) > 0.1 and abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[12].y) > 0.1
 
-                is_pinch = (abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[8].y) < 0.03 and abs(thumb_tip.x - results.multi_hand_landmarks[i].landmark[8].x) < 0.03) and (abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[12].y) < 0.03 and abs(thumb_tip.x - results.multi_hand_landmarks[i].landmark[12].x) < 0.03) and (abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[16].y) < 0.06 and abs(thumb_tip.x - results.multi_hand_landmarks[i].landmark[16].x) < 0.06) and (abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[20].y) < 0.09 and abs(thumb_tip.x - results.multi_hand_landmarks[i].landmark[20].x) < 0.09)
+                is_pinch = (results.multi_hand_landmarks[i].landmark[8].y < results.multi_hand_landmarks[i].landmark[7].y
+                            and results.multi_hand_landmarks[i].landmark[12].y < results.multi_hand_landmarks[i].landmark[11].y
+                            and results.multi_hand_landmarks[i].landmark[16].y < results.multi_hand_landmarks[i].landmark[15].y
+                            and results.multi_hand_landmarks[i].landmark[20].y < results.multi_hand_landmarks[i].landmark[19].y
+                            and abs(results.multi_hand_landmarks[i].landmark[8].x - results.multi_hand_landmarks[i].landmark[20].x) < 0.1)
 
-                if is_pinch:
-                    print("Pinch")
-                elif is_v_sign:
+                if is_v_sign:
                     print("V sign")
+                    color = (255,0,0)
+                elif is_thumb_up:
+                    print("Ok")
+                    color = (0,0,255)
+                elif is_pinch:
+                    print("Pinch")
+                    color = (0,0,0)
                 elif is_closed_fist:
                     print("Cerrado")
-                elif thumb_up:
-                    print("Ok")
+                    color = (0,255,0)
 
     # Display the frame
     cv2.imshow('Camera with Tracking', frame)
