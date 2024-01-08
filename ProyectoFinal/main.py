@@ -1,3 +1,5 @@
+import math
+
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -50,6 +52,8 @@ while cap.isOpened():
 
             mp.solutions.drawing_utils.draw_landmarks(frame, results.multi_hand_landmarks[i], mp_hands.HAND_CONNECTIONS)
 
+
+
             hand_label = "Right" if results.multi_handedness[i].classification[0].label == "Right" else "Left"
             cv2.putText(frame, hand_label,
                         (int(results.multi_hand_landmarks[i].landmark[0].x * frame.shape[1]), int(results.multi_hand_landmarks[i].landmark[0].y * frame.shape[0])),
@@ -57,6 +61,26 @@ while cap.isOpened():
 
             if hand_label == "Right":
                 frame = spray_paint(int(results.multi_hand_landmarks[i].landmark[8].x  * frame.shape[1]), int(results.multi_hand_landmarks[i].landmark[8].y * frame.shape[0]))
+            else:
+
+                thumb_tip = results.multi_hand_landmarks[i].landmark[4]  # Thumb tip landmark index
+                thumb_up = thumb_tip.y < results.multi_hand_landmarks[i].landmark[3].y and thumb_tip.y < results.multi_hand_landmarks[i].landmark[0].y and thumb_tip.y < results.multi_hand_landmarks[i].landmark[12].y
+
+                small_finger_tip = results.multi_hand_landmarks[i].landmark[20]
+                distance_thumb_index = math.sqrt((thumb_tip.x - small_finger_tip.x) ** 2 +
+                                                 (thumb_tip.y - small_finger_tip.y) ** 2 +
+                                                 (thumb_tip.z - small_finger_tip.z) ** 2)
+
+                # Example: Check if hand is in a closed fist
+                is_closed_fist = distance_thumb_index < 0.1  # Adjust the threshold as needed
+                is_v_sign = is_closed_fist and abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[8].y) > 0.1 and abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[12].y) > 0.1
+
+                if is_v_sign:
+                    print("V sign")
+                elif is_closed_fist:
+                    print("Cerrado")
+                elif thumb_up:
+                    print("Ok")
 
     # Display the frame
     cv2.imshow('Camera with Tracking', frame)
