@@ -21,7 +21,7 @@ def spray_paint(x, y):
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 
-canvas = np.zeros((480, 640, 3), dtype=np.uint8)
+canvas = None
 
 # Initialize video capture
 cap = cv2.VideoCapture(0)
@@ -30,7 +30,9 @@ while cap.isOpened():
     # Read frame from webcam
     ret, frame = cap.read()
 
-    print(frame.shape)
+    if canvas is None:
+        canvas = np.zeros((frame.shape[0], frame.shape[1], 3), dtype=np.uint8)
+
     if not ret:
         break
 
