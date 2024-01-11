@@ -75,11 +75,11 @@ while cap.isOpened():
                 is_thumb_up = thumb_tip.y < results.multi_hand_landmarks[i].landmark[3].y and thumb_tip.y < results.multi_hand_landmarks[i].landmark[0].y and thumb_tip.y < results.multi_hand_landmarks[i].landmark[12].y and (distance_thumb_pointer > 0.1)
 
                 small_finger_tip = results.multi_hand_landmarks[i].landmark[20]
-                distance_thumb_index = math.sqrt((thumb_tip.x - small_finger_tip.x) ** 2 +
+                distance_thumb_small = math.sqrt((thumb_tip.x - small_finger_tip.x) ** 2 +
                                                  (thumb_tip.y - small_finger_tip.y) ** 2 +
                                                  (thumb_tip.z - small_finger_tip.z) ** 2)
 
-                is_closed_fist = distance_thumb_index < 0.2
+                is_closed_fist = distance_thumb_small < 0.2
 
                 is_v_sign = is_closed_fist and abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[8].y) > 0.1 and abs(thumb_tip.y - results.multi_hand_landmarks[i].landmark[12].y) > 0.1
 
