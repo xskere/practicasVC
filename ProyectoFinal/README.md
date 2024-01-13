@@ -10,6 +10,16 @@
 
 Se encuentra detallado en el siguiente fichero PDF: [VC Memoria Proyecto Final.pdf](VC%20Memoria%20Proyecto%20Final.pdf)
 
+## Prueba de funcionamiento
+
+<p align="center">
+  <img width="600" height="350" src="test.gif">
+</p>
+
+<p align="center">
+    Prueba de funcionamiento, mostrando los posibles gestos con la mano izquierda y como funciona el pintar con la mano derecha.
+</p>
+
 ## Requisitos
 
 Tener instaladas las siguientes librerías:
