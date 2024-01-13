@@ -1,4 +1,4 @@
-# PROYECTO FINAL: ANÁLISIS FACIAL
+# PROYECTO FINAL
 ## Reconocimiento de gestos utilizando MediaPipe sin entrenamiento de modelo
 ### Por Alejando Rodríguez Moreno y Nauzet Déniz Perdomo
 
