@@ -15,6 +15,6 @@ Se encuentra detallado en el siguiente fichero PDF: [VC Memoria Proyecto Final.p
 Tener instaladas las siguientes librerías:
 
     * opencv-python (cv2)
-    * vumpy 
+    * numpy 
     * mediapipe
 
